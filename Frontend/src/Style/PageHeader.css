@@ -1,0 +1,43 @@
+:root {
+  --bg-dark: #121212;
+  --purple: #b269ff;
+  --radius: 8px;
+  --text: #ffffff;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.page-header__title {
+  color: var(--purple);
+  font-size: 2.25rem;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+.page-header__search {
+  flex: 1 1 100%;
+  padding: 0.55rem 1rem;
+  border: 1px solid #444;
+  border-radius: var(--radius);
+  background: var(--bg-dark);
+  color: var(--text);
+}
+
+.page-header__add {
+  background: var(--purple);
+  border: none;
+  color: var(--text);
+  padding: 0.55rem 1.25rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.page-header__add:hover {
+  filter: brightness(1.1);
+}

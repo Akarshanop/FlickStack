@@ -1,0 +1,44 @@
+:root {
+  --form-bg: #1e1e1e;
+  --accent: #b269ff;
+  --text: #fff;
+  --radius: 8px;
+}
+
+/* applies to ANY element using className="media-form" */
+.media-form {
+  background-color: var(--form-bg);
+  padding: 1.5rem;
+  margin: 1rem auto;
+  border-radius: var(--radius);
+  max-width: 600px;
+  color: var(--text);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.media-form input,
+.media-form textarea,
+.media-form select {
+  width: 100%;
+  padding: 0.6rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  background: #121212;
+  border: 1px solid #444;
+  border-radius: var(--radius);
+  color: var(--text);
+}
+
+.media-form button {
+  background-color: var(--accent);
+  color: var(--text);
+  padding: 0.5rem 1rem;
+  border: none;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.media-form button:hover {
+  filter: brightness(1.1);
+}

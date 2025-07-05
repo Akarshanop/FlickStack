@@ -1,0 +1,30 @@
+:root {
+  --card-dark: #1e1e1e;
+  --border-dark: #333;
+  --text: #ffffff;
+  --radius: 8px;
+}
+
+/* Shared wrapper padding */
+.media-list {
+  padding: 2rem;
+}
+
+/* Shared card style */
+.media-card {
+  display: flex;
+  gap: 1rem;
+  background: var(--card-dark);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  color: var(--text);
+}
+
+.media-card img {
+  width: 100px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 4px;
+}
