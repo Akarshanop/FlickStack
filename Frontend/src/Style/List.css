@@ -13,6 +13,7 @@
 /* Shared card style */
 .media-card {
   display: flex;
+  max-width: 380px;
   gap: 1rem;
   background: var(--card-dark);
   border: 1px solid var(--border-dark);
@@ -27,4 +28,28 @@
   height: 140px;
   object-fit: cover;
   border-radius: 4px;
+}
+
+.Block {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+}
+.Block-Buttons{
+  display: flex;
+  gap: 40px;
+}
+.buttons{
+  margin-top: 0.75rem;
+  padding: 0.45rem 0.9rem;
+  background-color: #b269ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  align-self: flex-end;
+}
+.pyara{
+  margin-top: 2px;
 }

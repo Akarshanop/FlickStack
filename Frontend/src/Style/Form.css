@@ -42,3 +42,23 @@
 .media-form button:hover {
   filter: brightness(1.1);
 }
+
+.custom-select {
+  width: 100%;
+  padding: 8px;
+  background-color: #1f1f1f; /* Dark background */
+  color: white;              
+  border-radius: 6px;
+  border: 1px solid #555;
+  height: 150px;            
+  font-size: 14px;
+  outline: none;
+}
+
+/* Style for each option */
+.custom-select option {
+  background-color: #1f1f1f;
+  color: white;
+  padding: 6px;
+}
+

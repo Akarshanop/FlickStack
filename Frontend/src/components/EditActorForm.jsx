@@ -8,9 +8,9 @@ function EditActorForm({ actor, onUpdated, onCancel }) {
   const [image_url, setImageUrl] = useState(actor.image_url);
 
   const [availableMovies, setAvailableMovies] = useState([]);
-  const [selectedMovies, setSelectedMovies] = useState([]); // IDs
+  const [selectedMovies, setSelectedMovies] = useState([]); 
 
-  /* fetch movies + preset selected */
+  
   useEffect(() => {
     API.get("/movies")
       .then((res) => {
@@ -32,11 +32,11 @@ function EditActorForm({ actor, onUpdated, onCancel }) {
 
     try {
       await API.put(`/actors/${actor.id}`, updated);
-      alert("✅ Actor updated!");
+      alert(" Actor updated!");
       onUpdated();
     } catch (err) {
       console.error("Update failed:", err);
-      alert("❌ Failed to update actor");
+      alert(" Failed to update actor");
     }
   };
 
@@ -71,9 +71,9 @@ function EditActorForm({ actor, onUpdated, onCancel }) {
       />
 
       <br />
-      <button type="submit">💾 Save</button>
+      <button type="submit"> Save</button>
       <button type="button" onClick={onCancel} style={{ marginLeft: "1rem" }}>
-        ❌ Cancel
+         Cancel
       </button>
     </form>
   );

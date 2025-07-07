@@ -9,37 +9,34 @@ function ActorForm({ onCreated }) {
   const [availableMovies, setAvailableMovies] = useState([]);
   const [selectedMovies, setSelectedMovies] = useState([]); // ← stores IDs now
 
-  /* ─── fetch movies once ─────────────────────────────────────────────── */
   useEffect(() => {
     API.get("/movies")
       .then((res) => setAvailableMovies(res.data))
       .catch((err) => console.error("Error fetching movies:", err));
   }, []);
 
-  /* ─── submit ────────────────────────────────────────────────────────── */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newActor = {
       name,
       image_url,
-      movieIds: selectedMovies, // already array of IDs
+      movieIds: selectedMovies, 
     };
 
     try {
       await API.post("/actors", newActor);
-      alert("✅ Actor created!");
+      alert("Actor created!");
       onCreated();
       setName("");
       setImageUrl("");
       setSelectedMovies([]);
     } catch (err) {
       console.error("Error creating actor:", err);
-      alert("❌ Failed to create actor");
+      alert("Failed to create actor");
     }
   };
 
-  /* ─── react-select options & value ──────────────────────────────────── */
   const movieOptions = availableMovies.map((m) => ({
     value: m.id,
     label: m.title,
@@ -77,7 +74,7 @@ function ActorForm({ onCreated }) {
       />
       <br />
 
-      <button type="submit">➕ Add Actor</button>
+      <button type="submit">Add Actor</button>
     </form>
   );
 }

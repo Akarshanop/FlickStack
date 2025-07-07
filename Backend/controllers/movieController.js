@@ -1,8 +1,7 @@
-// Backend/controllers/movieController.js
 const pool = require("../db");
 const { replaceLinks } = require("../helpers/joinHelpers");
 
-/* ─── GET /movies ───────────────────────────────────────────── */
+
 exports.getAllMovies = async (_req, res) => {
   const [rows] = await pool.query(`
     SELECT
@@ -19,7 +18,6 @@ exports.getAllMovies = async (_req, res) => {
   res.json(rows);
 };
 
-/* ─── POST /movies ──────────────────────────────────────────── */
 exports.createMovie = async (req, res) => {
   const { title, description, image_url, actorIds = [] } = req.body;
 
@@ -40,7 +38,6 @@ exports.createMovie = async (req, res) => {
   res.status(201).json({ movieId: result.insertId });
 };
 
-/* ─── PUT /movies/:id ───────────────────────────────────────── */
 exports.updateMovie = async (req, res) => {
   const { id } = req.params;
   const { title, description, image_url, actorIds = [] } = req.body;
@@ -55,7 +52,6 @@ exports.updateMovie = async (req, res) => {
   res.json({ message: "Movie updated" });
 };
 
-/* ─── DELETE /movies/:id ────────────────────────────────────── */
 exports.deleteMovie = async (req, res) => {
   const { id } = req.params;
   await pool.query("DELETE FROM movie_actor WHERE movie_id = ?", [id]);

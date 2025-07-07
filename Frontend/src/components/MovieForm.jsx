@@ -8,16 +8,15 @@ function MovieForm({ onCreated }) {
   const [description, setDescription] = useState("");
   const [image_url, setImageUrl] = useState("");
   const [availableActors, setAvailableActors] = useState([]);
-  const [selectedActors, setSelectedActors] = useState([]); // ← IDs
+  const [selectedActors, setSelectedActors] = useState([]); 
 
-  /* ─── fetch actors once ─────────────────────────────────────────────── */
+  
   useEffect(() => {
     API.get("/actors")
       .then((res) => setAvailableActors(res.data))
       .catch((err) => console.error("Error fetching actors:", err));
   }, []);
 
-  /* ─── submit ────────────────────────────────────────────────────────── */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -25,12 +24,12 @@ function MovieForm({ onCreated }) {
       title,
       description,
       image_url,
-      actorIds: selectedActors, // already IDs
+      actorIds: selectedActors, 
     };
 
     try {
       await API.post("/movies", newMovie);
-      alert("🎬 Movie created!");
+      alert("Movie created!");
       onCreated();
       setTitle("");
       setDescription("");
@@ -38,11 +37,10 @@ function MovieForm({ onCreated }) {
       setSelectedActors([]);
     } catch (err) {
       console.error("Error creating movie:", err);
-      alert("❌ Failed to create movie");
+      alert(" Failed to create movie");
     }
   };
 
-  /* ─── react-select options & value ──────────────────────────────────── */
   const actorOptions = availableActors.map((a) => ({
     value: a.id,
     label: a.name,

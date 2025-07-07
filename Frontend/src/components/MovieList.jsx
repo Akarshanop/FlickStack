@@ -17,7 +17,12 @@ function MovieList() {
       .then((res) => setMovies(res.data))
       .catch((err) => console.error("Error fetching movies:", err));
   };
-
+  
+  const deleteMovie =async(movie)=>{
+        await API.delete(`/movies/${movie.id}`)
+        setMovies((prev) => prev.filter((a) => a.id !== movie.id));
+    }
+    
   useEffect(() => {
     fetchMovies();
   }, []);
@@ -28,7 +33,6 @@ function MovieList() {
 
   return (
     <div className="media-list">
-      {/* ───────────────────────── Header (shared) ───────────────────────── */}
       <PageHeader
         title="Movies"
         searchPlaceholder="Search movies by title…"
@@ -38,42 +42,49 @@ function MovieList() {
         onAdd={() => setShowAddModal(true)}
       />
 
-      {/* ───────────────────────── Edit Form (inline) ────────────────────── */}
-      {editMovie && (
-        <EditMovieForm
-          movie={editMovie}
-          onUpdated={() => {
-            setEditMovie(null);
-            fetchMovies();
-          }}
-          onCancel={() => setEditMovie(null)}
-        />
-      )}
+            
+        <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)}>
+          <MovieForm
+            onCreated={() => {
+              setShowAddModal(false);
+              fetchMovies();
+            }}
+          />
+        </Modal>
 
-      {/* ───────────────────────── Add Form (modal) ──────────────────────── */}
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)}>
-        <MovieForm
-          onCreated={() => {
-            setShowAddModal(false);
-            fetchMovies();
-          }}
-        />
-      </Modal>
+        
+        <Modal isOpen={Boolean(editMovie)} onClose={() => setEditMovie(null)}>
+          {editMovie && (
+            <EditMovieForm
+              movie={editMovie}
+              onUpdated={() => {
+                setEditMovie(null);
+                fetchMovies();
+              }}
+              onCancel={() => setEditMovie(null)}
+            />
+          )}
+        </Modal>
 
-      {/* ───────────────────────── Movie Cards ───────────────────────────── */}
-      {filtered.map((movie) => (
+
+      <div className="Block">
+         {filtered.map((movie) => (
         <div key={movie.id} className="media-card">
           <img src={movie.image_url} alt={movie.title} className="poster" />
           <div>
             <h2>{movie.title}</h2>
             <p>{movie.description}</p>
-            <p>
+            <p className="pyara">
               <strong>Actors:</strong> {movie.actors || "None"}
             </p>
-            <button onClick={() => setEditMovie(movie)}>✏️ Edit</button>
+            <div className="Block-Buttons">
+                <button className="buttons"  onClick={() => setEditMovie(movie)}> Edit </button>
+                <button className="buttons" onClick={()=>deleteMovie(movie)}>Delete</button>
+            </div>
           </div>
         </div>
       ))}
+      </div>
     </div>
   );
 }

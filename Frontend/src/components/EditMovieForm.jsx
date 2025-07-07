@@ -9,14 +9,14 @@ function EditMovieForm({ movie, onUpdated, onCancel }) {
   const [image_url, setImageUrl] = useState(movie.image_url);
 
   const [availableActors, setAvailableActors] = useState([]);
-  const [selectedActors, setSelectedActors] = useState([]); // IDs
+  const [selectedActors, setSelectedActors] = useState([]); 
 
-  /* fetch actors + preset selected */
+ 
   useEffect(() => {
     API.get("/actors")
       .then((res) => {
         setAvailableActors(res.data);
-        // preset by ID if movie.actors is an array of actor objects / ids
+        console.log(typeof(movie.actors))//added
         const ids =
           movie.actors?.map((a) => (typeof a === "string" ? a : a.id)) ?? [];
         setSelectedActors(ids);
@@ -35,11 +35,11 @@ function EditMovieForm({ movie, onUpdated, onCancel }) {
 
     try {
       await API.put(`/movies/${movie.id}`, updated);
-      alert("✅ Movie updated!");
+      alert(" Movie updated!");
       onUpdated();
     } catch (err) {
       console.error("Update failed:", err);
-      alert("❌ Failed to update movie");
+      alert("Failed to update movie");
     }
   };
 
@@ -73,16 +73,18 @@ function EditMovieForm({ movie, onUpdated, onCancel }) {
 
       <label>Choose Actors:</label>
       <Select
+         classNamePrefix="actor" 
         isMulti
         options={actorOptions}
         value={actorOptions.filter((o) => selectedActors.includes(o.value))}
         onChange={(sel) => setSelectedActors(sel.map((o) => o.value))}
+        
       />
 
       <br />
-      <button type="submit">💾 Save</button>
+      <button type="submit"> Save</button>
       <button type="button" onClick={onCancel} style={{ marginLeft: "1rem" }}>
-        ❌ Cancel
+         Cancel
       </button>
     </form>
   );
